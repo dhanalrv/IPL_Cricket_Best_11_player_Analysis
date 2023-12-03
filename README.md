@@ -93,36 +93,30 @@ Considered below metrics to perform Analysis-
 Measures:		boundary runs = fact_batting_summary[4s]*4 + fact_batting_summary[6s]*6		
 Sno	Measures	Description / Purpose	DAX FORMULA	TABLE
 
-| Measures        | Description /Purpose                                    | DAX FORMULA| Table|
-| :----------------: |:-----------------------------------------------:| :------:|:-------:|
-| Total Runs   | Total number of runs scored by the batsman            |   Total Runs = SUM(fact_batting_summary[runs]) | fact_batting_summary |
-| Total Innings Batted  | Total number of innings a batsman got a chance to bat         |   Total Innings Batted = COUNT(fact_batting_summary[match_id])    | fact_batting_summary|
-| Total Innings Dismissed| To find the number of innings batsman got out|   Total Innings Dismissed= SUM(fact_batting_summary[out])  | fact_batting_summary |
-| Batting Average| Average runs scored in an innings |   Batting Avg = DIVIDE([Total Runs],[Total Innings Dismissed],0)  | fact_batting_summary |
-| Total balls Faced | Total number of balls faced by the batsman |   total balls faced = SUM(fact_batting_summary[balls])  | fact_batting_summary |
-| Strike Rate | No of runs scored per 100 balls|   Strike rate = DIVIDE([Total Runs],[total balls faced],0)*100  | fact_batting_summary |
-| Batting Position| Batting position of a player |   Batting Position = ROUNDUP(AVERAGE(fact_batting_summary[battingPos]),0)  | fact_batting_summary |
-| Boundary %| Percentage of boundaries scored by the Batsman |   Boundary % =  DIVIDE(SUM(fact_batting_summary[Boundary runs]),[Total Runs],0)  | fact_batting_summary |
-| Avg. balls Faced| Average balls faced by the batter in an innings |   Avg. balls Faced=AVERAGE(fact_batting_summary[balls])  | fact_batting_summary |
-| Wickets| Total number of wickets taken by a bowler |   wickets = SUM(fact_bowling_summary[wickets])  | fact_bowling_summary |
+| Measures               | Description /Purpose                                  | DAX FORMULA                                                                   | Table                |
+| :--------------------: |:-----------------------------------------------------:| :----------------------------------------------------------------------------:|:--------------------:|
+| Total Runs             | Total number of runs scored by the batsman            | Total Runs = SUM(fact_batting_summary[runs])                                  | fact_batting_summary |
+| Total Innings Batted   | Total number of innings a batsman got a chance to bat | Total Innings Batted = COUNT(fact_batting_summary[match_id])                  | fact_batting_summary |
+| Total Innings Dismissed| To find the number of innings batsman got out         | Total Innings Dismissed= SUM(fact_batting_summary[out])                       | fact_batting_summary |
+| Batting Average        | Average runs scored in an innings                     | Batting Avg = DIVIDE([Total Runs],[Total Innings Dismissed],0)                | fact_batting_summary |
+| Total balls Faced      | Total number of balls faced by the batsman            | total balls faced = SUM(fact_batting_summary[balls])                          | fact_batting_summary |
+| Strike Rate            | No of runs scored per 100 balls                       | Strike rate = DIVIDE([Total Runs],[total balls faced],0)*100                  | fact_batting_summary |
+| Batting Position       | Batting position of a player                          | Batting Position = ROUNDUP(AVERAGE(fact_batting_summary[battingPos]),0)       | fact_batting_summary |
+| Boundary %             | Percentage of boundaries scored by the Batsman        | Boundary % =  DIVIDE(SUM(fact_batting_summary[Boundary runs]),[Total Runs],0) | fact_batting_summary |
+| Avg. balls Faced       | Average balls faced by the batter in an innings       | Avg. balls Faced=AVERAGE(fact_batting_summary[balls])                         | fact_batting_summary |
+| Wickets                | Total number of wickets taken by a bowler             | wickets = SUM(fact_bowling_summary[wickets])                                  | fact_bowling_summary |
+| balls Bowled           | Total number of balls bowled by the bowler            | balls Bowled = SUM(fact_bowling_summary[balls])                               | fact_bowling_summary |
+| Runs Conceded          | Total runs conceded by the bowler                     | Runs Conceded = SUM(fact_bowling_summary[runs])                               | fact_bowling_summary |
+| Bowling Economy        | Average number of runs conceded in an over            | Economy = DIVIDE( [Runs Conceded], ([balls Bowled]/6),0)                      | fact_bowling_summary |
+| Bowling Strike Rate    | Number of balls bowled per wicket                     | Bowling Strike Rate = DIVIDE([balls Bowled], [wickets],0)                     | fact_bowling_summary |
+| Bowling Average        | No. of runs allowed per wicket                        | Bowling Average = DIVIDE([Runs Conceded],[wickets],0)                         | fact_bowling_summary |
+| Total Innings Bowled   | Total number of innings bowled by a bowler            | Total Innings Bowled = DISTINCTCOUNT(fact_bowling_summary[match_id])          | fact_bowling_summary |
+| Dot Ball %             | Percentage of dot balls bowled by a bowler            | Dot ball % = DIVIDE(SUM(fact_bowling_summary[zeros]), SUM(fact_bowling_summary[balls]),0) | fact_bowling_summary |
+| Player Selection       | To understand if a player is selected or not          | Player Selection = if(ISFILTERED(dim_players[name]),"1","0")                  | dim_players |
+| Display Text           | To display a text of no player is selected            | Display Text = if([Player Selection] = "1", " " ,"Select Player(s) by clicking the player’s name to see their individual or combined strength.") |  |
+| Color Callout Value    | To display a value only when a player is selected     | Color Callout Value = if([Player Selection]="0", "#D0CF1D","#1D1D2E")         |  |
 
-
-						
-10	Wickets	Total number of wickets taken by a bowler	wickets = SUM(fact_bowling_summary[wickets])	fact_bowling_summary
-11	balls Bowled	Total number of balls bowled by the bowler	balls Bowled = SUM(fact_bowling_summary[balls])	fact_bowling_summary
-12	Runs Conceded	Total runs conceded by the bowler	Runs Conceded = SUM(fact_bowling_summary[runs])	fact_bowling_summary
-13	Bowling Economy	Average number of runs conceded in an over	Economy = DIVIDE( [Runs Conceded], ([balls Bowled]/6),0)	fact_bowling_summary
-14	Bowling Strike Rate	Number of balls bowled per wicket	Bowling Strike Rate = DIVIDE([balls Bowled], [wickets],0)	fact_bowling_summary
-15	Bowling Average	No. of runs allowed per wicket  	Bowling Average = DIVIDE([Runs Conceded],[wickets],0)	fact_bowling_summary
 				
-16	Total Innings Bowled	Total number of innings bowled by a bowler	Total Innings Bowled = DISTINCTCOUNT(fact_bowling_summary[match_id])	fact_bowling_summary
-17	Dot Ball %	Percentage of dot balls bowled by a bowler	Dot ball % = DIVIDE(SUM(fact_bowling_summary[zeros]), SUM(fact_bowling_summary[balls]),0)	fact_bowling_summary
-				
-18	Player Selection	To understand if a player is selected or not	Player Selection = if(ISFILTERED(dim_players[name]),"1","0")	
-19	Display Text	To display a text of no player is selected	"Display Text = if([Player Selection] = "1", " " ,"Select Player(s) by clicking 
-the player’s name to see their individual or combined strength.")"	
-20	Color Callout Value	To display a value only when a player is selected	Color Callout Value = if([Player Selection]="0", "#D0CF1D","#1D1D2E")	<img width="1039" alt="image" src="https://github.com/dhanalrv/IPL_Cricket_Best_11_player_Analysis/assets/123315375/ee53ca7e-9639-4524-bce5-6913eaae895c">
-
 
 
 
