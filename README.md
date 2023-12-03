@@ -90,7 +90,7 @@ Considered below metrics to perform Analysis-
 3. Verified the data model and relationship between the tables.
 4. Created the Statistical measures which help in dashboard calculations. Below are the measured & calculated columns used-
 
-**Measures**:		boundary runs = fact_batting_summary[4s]*4 + fact_batting_summary[6s]*6		
+**Measures**:		
 
 
 | Measures               | Description /Purpose                                  | DAX FORMULA                                                                   | Table                |
@@ -123,10 +123,7 @@ Considered below metrics to perform Analysis-
 | :--------------------: |:---------------------------------------------------------------:  | :----------------------------------------------------------------------:|:--------------------:|
 | Boundary runs          | To find the total number of runs scored by hitting fours and sixes| boundary runs = fact_batting_summary[fours]*4 + fact_batting_summary[sixes]*6 | fact_batting_summary |
 | Boundary runs bowling  | To find the total number of runs conceded by bowlers in boundaries| Boundary runs bowling = fact_bowling_summary[fours]*4 +fact_bowling_summary[Sixes]*6 | fact_bowling_summary |
-| Custom Batting Order   | To assign the batting order to potential final 11                 | "Custom Batting Order = 
-SWITCH(
-    TRUE(),
-dim_players[name] = "Jos Buttler",1,
+| Custom Batting Order   | To assign the batting order to potential final 11                 | Custom Batting Order = SWITCH( TRUE(), dim_players[name] = "Jos Buttler",1, 
 dim_players[name] = "Rilee Rossouw",2,
 dim_players[name] = "Alex Hales",2,
 dim_players[name]  = "Virat Kohli",3,
@@ -141,7 +138,7 @@ dim_players[name] = "Shadab Khan" ,8,
 dim_players[name] = "Sam Curran" ,9,
 dim_players[name] = "Shaheen Shah Afridi" ,10,
 dim_players[name] = "Anrich Nortje" ,11
-)"                       | dim_players |
+) | dim_players |
 
 
 
