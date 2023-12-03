@@ -17,6 +17,7 @@ considered the data from ESPN website through web scrapping. Below are the data 
 
 **Requirements Gathering** :
 Considered below metrics to perform Analysis-
+
 **Openers** -
 | Parameters      | Description                        | Criteria|
 | :--------------:|:--------------------------------:  | :------:|
