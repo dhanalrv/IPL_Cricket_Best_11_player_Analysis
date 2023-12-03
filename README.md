@@ -79,10 +79,10 @@ Considered below metrics to perform Analysis-
 4. Added new columns which helps in joining the tables and maintain the relationship between tables.
 5. Data Transformations are performed to make data more efficient to draw insights.
 6. Finally write the cleaned and transformed data to csv files.
-   > dim_match_summary.csv
-   > dim_players_no_images.csv
-   > fact_bating_summary.csv
-   > fact_bowling_summary.csv
+    dim_match_summary.csv
+    dim_players_no_images.csv
+    fact_bating_summary.csv
+    fact_bowling_summary.csv
 
 **DataCleaning and Transformations Using MS Excel** :
 1. Open the files in excel and re-verified the data, make sured the data was cleaned and in required format.
