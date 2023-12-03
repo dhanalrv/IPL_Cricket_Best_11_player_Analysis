@@ -88,10 +88,10 @@ Considered below metrics to perform Analysis-
 1. Loaded the data into powerBI and Transformed the data through power Query.
 2. Verified the data was cleaned and was in required format.
 3. Verified the data model and relationship between the tables.
-4. Created the Statistical measures which help in dashboard calculations. Below are the measured used-
+4. Created the Statistical measures which help in dashboard calculations. Below are the measured & calculated columns used-
 
-Measures:		boundary runs = fact_batting_summary[4s]*4 + fact_batting_summary[6s]*6		
-Sno	Measures	Description / Purpose	DAX FORMULA	TABLE
+**Measures**:		boundary runs = fact_batting_summary[4s]*4 + fact_batting_summary[6s]*6		
+
 
 | Measures               | Description /Purpose                                  | DAX FORMULA                                                                   | Table                |
 | :--------------------: |:-----------------------------------------------------:| :----------------------------------------------------------------------------:|:--------------------:|
@@ -115,6 +115,36 @@ Sno	Measures	Description / Purpose	DAX FORMULA	TABLE
 | Player Selection       | To understand if a player is selected or not          | Player Selection = if(ISFILTERED(dim_players[name]),"1","0")                  | dim_players |
 | Display Text           | To display a text of no player is selected            | Display Text = if([Player Selection] = "1", " " ,"Select Player(s) by clicking the player’s name to see their individual or combined strength.") |  |
 | Color Callout Value    | To display a value only when a player is selected     | Color Callout Value = if([Player Selection]="0", "#D0CF1D","#1D1D2E")         |  |
+
+
+**Calculated Columns** :
+
+| Calculated Column Name | Description /Purpose                                              | DAX FORMULA                                                             | Table                |
+| :--------------------: |:---------------------------------------------------------------:  | :----------------------------------------------------------------------:|:--------------------:|
+| Boundary runs          | To find the total number of runs scored by hitting fours and sixes| boundary runs = fact_batting_summary[fours]*4 + fact_batting_summary[sixes]*6 | fact_batting_summary |
+| Boundary runs bowling  | To find the total number of runs conceded by bowlers in boundaries| Boundary runs bowling = fact_bowling_summary[fours]*4 +fact_bowling_summary[Sixes]*6 | fact_bowling_summary |
+| Custom Batting Order   | To assign the batting order to potential final 11                 | "Custom Batting Order = 
+SWITCH(
+    TRUE(),
+dim_players[name] = "Jos Buttler",1,
+dim_players[name] = "Rilee Rossouw",2,
+dim_players[name] = "Alex Hales",2,
+dim_players[name]  = "Virat Kohli",3,
+dim_players[name] = "Suryakumar Yadav" ,4,
+dim_players[name] = "Glenn Phillips" ,5,
+dim_players[name] = "Marcus Stoinis" ,6,
+dim_players[name] = "Glenn Maxwell" ,6,
+dim_players[name] = "Hardik Pandya" ,6,
+dim_players[name] = "Sikandar Raza" ,7,
+dim_players[name] = "Rashid Khan" ,8,
+dim_players[name] = "Shadab Khan" ,8,
+dim_players[name] = "Sam Curran" ,9,
+dim_players[name] = "Shaheen Shah Afridi" ,10,
+dim_players[name] = "Anrich Nortje" ,11
+)"                       | dim_players |
+
+
+
 
 				
 
