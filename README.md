@@ -87,7 +87,7 @@ Considered below metrics to perform Analysis-
 **DataCleaning and Transformations Using MS Excel** :
 1. Open the files in excel and re-verified the data, make sured the data was cleaned and in required format.
 2. Added the new column image manually which can help in visualization.
-   	--> dim_players.csv
+	* dim_players.csv
 
 **Data Visualization using PowerBI** :
 1. Loaded the data into powerBI and Transformed the data through power Query.
