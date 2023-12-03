@@ -123,22 +123,7 @@ Considered below metrics to perform Analysis-
 | :--------------------: |:---------------------------------------------------------------:  | :----------------------------------------------------------------------:|:--------------------:|
 | Boundary runs          | To find the total number of runs scored by hitting fours and sixes| boundary runs = fact_batting_summary[fours]*4 + fact_batting_summary[sixes]*6 | fact_batting_summary |
 | Boundary runs bowling  | To find the total number of runs conceded by bowlers in boundaries| Boundary runs bowling = fact_bowling_summary[fours]*4 +fact_bowling_summary[Sixes]*6 | fact_bowling_summary |
-| Custom Batting Order   | To assign the batting order to potential final 11                 | Custom Batting Order = SWITCH( TRUE(), dim_players[name] = "Jos Buttler",1, 
-dim_players[name] = "Rilee Rossouw",2,
-dim_players[name] = "Alex Hales",2,
-dim_players[name]  = "Virat Kohli",3,
-dim_players[name] = "Suryakumar Yadav" ,4,
-dim_players[name] = "Glenn Phillips" ,5,
-dim_players[name] = "Marcus Stoinis" ,6,
-dim_players[name] = "Glenn Maxwell" ,6,
-dim_players[name] = "Hardik Pandya" ,6,
-dim_players[name] = "Sikandar Raza" ,7,
-dim_players[name] = "Rashid Khan" ,8,
-dim_players[name] = "Shadab Khan" ,8,
-dim_players[name] = "Sam Curran" ,9,
-dim_players[name] = "Shaheen Shah Afridi" ,10,
-dim_players[name] = "Anrich Nortje" ,11
-) | dim_players |
+| Custom Batting Order   | To assign the batting order to potential final 11                 | Custom Batting Order = SWITCH( TRUE(), dim_players[name] = "Jos Buttler",1, dim_players[name] = "Rilee Rossouw",2, dim_players[name] = "Alex Hales",2, dim_players[name]  = "Virat Kohli",3, dim_players[name] = "Suryakumar Yadav" ,4, dim_players[name] = "Glenn Phillips" ,5, dim_players[name] = "Marcus Stoinis" ,6, dim_players[name] = "Glenn Maxwell" ,6, dim_players[name] = "Hardik Pandya" ,6, dim_players[name] = "Sikandar Raza" ,7, dim_players[name] = "Rashid Khan" ,8, dim_players[name] = "Shadab Khan" ,8, dim_players[name] = "Sam Curran" ,9, dim_players[name] = "Shaheen Shah Afridi" ,10, dim_players[name] = "Anrich Nortje" ,11) | dim_players |
 
 
 
