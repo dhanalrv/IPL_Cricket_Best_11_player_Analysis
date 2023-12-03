@@ -56,3 +56,15 @@ Considered below metrics to perform Analysis-
 | Bowling Economy    | Average runs allowed per over                   |   <7    |
 | Bowling Strike Rate| Average no. of balls required to take a wicket  |   <20   |
 
+**Specialist Fast Bowler** -
+| Parameters         | Description                                     | Criteria|
+| :----------------: |:-----------------------------------------------:| :------:|
+| Innings Bowled     | Total innings Bowled by the bowler              |   >2    |
+| Bowling Economy    | Average runs allowed per over                   |   <7    |
+| Bowling Strike Rate| Average no. of balls required to take a wicket  |   <20   |
+| Bowling Style      | Bowling style of the player                     |   <20   |
+| Bowling average    | No. of runs allowed per wicket                  |   >15   |
+| Dot Ball %         | % of dot balls bowled                           |   >140  |
+
+
+
