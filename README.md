@@ -88,30 +88,26 @@ Considered below metrics to perform Analysis-
 1. Loaded the data into powerBI and Transformed the data through power Query.
 2. Verified the data was cleaned and was in required format.
 3. Verified the data model and relationship between the tables.
-4. Created the required measures which help in dashboard calculations. Below are the measured used-
+4. Created the Statistical measures which help in dashboard calculations. Below are the measured used-
 
 Measures:		boundary runs = fact_batting_summary[4s]*4 + fact_batting_summary[6s]*6		
 Sno	Measures	Description / Purpose	DAX FORMULA	TABLE
 
-**| Measures        | Description /Purpose                                    | DAX FORMULA| DAX FORMULA|**
-| :----------------: |:-----------------------------------------------:| :------:|
-| Innings Bowled     | Total innings Bowled by the bowler              |   >2    |
-| Bowling Economy    | Average runs allowed per over                   |   <7    |
-| Bowling Strike Rate| Average no. of balls required to take a wicket  |   <20   |
+| Measures        | Description /Purpose                                    | DAX FORMULA| Table|
+| :----------------: |:-----------------------------------------------:| :------:|:-------:|
+| Total Runs   | Total number of runs scored by the batsman            |   Total Runs = SUM(fact_batting_summary[runs]) | fact_batting_summary |
+| Total Innings Batted  | Total number of innings a batsman got a chance to bat         |   Total Innings Batted = COUNT(fact_batting_summary[match_id])    | fact_batting_summary|
+| Total Innings Dismissed| To find the number of innings batsman got out|   Total Innings Dismissed= SUM(fact_batting_summary[out])  | fact_batting_summary |
+| Batting Average| Average runs scored in an innings |   Batting Avg = DIVIDE([Total Runs],[Total Innings Dismissed],0)  | fact_batting_summary |
+| Total balls Faced | Total number of balls faced by the batsman |   total balls faced = SUM(fact_batting_summary[balls])  | fact_batting_summary |
+| Strike Rate | No of runs scored per 100 balls|   Strike rate = DIVIDE([Total Runs],[total balls faced],0)*100  | fact_batting_summary |
+| Batting Position| Batting position of a player |   Batting Position = ROUNDUP(AVERAGE(fact_batting_summary[battingPos]),0)  | fact_batting_summary |
+| Boundary %| Percentage of boundaries scored by the Batsman |   Boundary % =  DIVIDE(SUM(fact_batting_summary[Boundary runs]),[Total Runs],0)  | fact_batting_summary |
+| Avg. balls Faced| Average balls faced by the batter in an innings |   Avg. balls Faced=AVERAGE(fact_batting_summary[balls])  | fact_batting_summary |
+| Wickets| Total number of wickets taken by a bowler |   wickets = SUM(fact_bowling_summary[wickets])  | fact_bowling_summary |
 
 
-1	Total Runs	Total number of runs scored by the batsman	Total Runs = SUM(fact_batting_summary[runs])	fact_batting_summary
-2	Total Innings Batted	Total number of innings a batsman got a chance to bat	Total Innings Batted = COUNT(fact_batting_summary[match_id])	fact_batting_summary
-3	Total Innings Dismissed	To find the number of innings batsman got out	Total Innings Dismissed= SUM(fact_batting_summary[out])	fact_batting_summary
-4	Batting Average	Average runs scored in an innings	Batting Avg = DIVIDE([Total Runs],[Total Innings Dismissed],0)	fact_batting_summary
-				
-5	Total balls Faced	Total number of balls faced by the batsman	total balls faced = SUM(fact_batting_summary[balls])	fact_batting_summary
-6	Strike Rate	No of runs scored per 100 balls 	Strike rate = DIVIDE([Total Runs],[total balls faced],0)*100	fact_batting_summary
-				
-7	Batting Position	Batting position of a player	Batting Position = ROUNDUP(AVERAGE(fact_batting_summary[battingPos]),0)	fact_batting_summary
-8	Boundary %	Percentage of boundaries scored by the Batsman	Boundary % =  DIVIDE(SUM(fact_batting_summary[Boundary runs]),[Total Runs],0)	fact_batting_summary
-9	Avg. balls Faced	Average balls faced by the batter in an innings	Avg. balls Faced=AVERAGE(fact_batting_summary[balls])	fact_batting_summary
-				
+						
 10	Wickets	Total number of wickets taken by a bowler	wickets = SUM(fact_bowling_summary[wickets])	fact_bowling_summary
 11	balls Bowled	Total number of balls bowled by the bowler	balls Bowled = SUM(fact_bowling_summary[balls])	fact_bowling_summary
 12	Runs Conceded	Total runs conceded by the bowler	Runs Conceded = SUM(fact_bowling_summary[runs])	fact_bowling_summary
