@@ -1,5 +1,5 @@
 # IPL_Cricket_Best_11_player_Analysis
-Data Analysis Project for IPL Cricket to select Best 11 player.
+Data Analysis Project for IPL Cricket to select Best 11 player using Python and PowerBI.
 
 **Problem Statement** :
 
@@ -74,10 +74,10 @@ Considered below metrics to perform Analysis-
 
 **DataCleaning and basic Transformations Using Python (Jupyter Notebook)** : 
 1. Read the Json files into pandas dataframe and performed Data Cleaning and checked the data types.
-2. Handled the Null and duplicate data.
+2. Handled the Null and duplicate data using EDA (Exploratory data Analysis)
 3. Renaming of column names and cleaned up the weired charaters.
-4. Added new columns which helps in joining the tables and maintain the relationship between tables.
-5. Data Transformations are performed to make data more efficient to draw insights.
+4. Added new columns which helps in joining the tables and maintain the relationship and integrity between tables.
+5. Data Transformations are performed to draw insightful and meaningful report.
 6. Finally write the cleaned and transformed data to csv files.
 	* dim_match_summary.csv
  	* dim_players_no_images.csv
@@ -133,6 +133,9 @@ Considered below metrics to perform Analysis-
 
 5. Created the report for Openers ,Middle Order anchor , Lower Order Anchor , Lower Middle Order Anchor ,Specialist Fast bowlers ,Player detals by match , Final Team.
    	* IPL Cricket Best 11.pbix
+6. Used the line graph to show the trend of the different metrics for players.
+7. Used the simple table to show the eligible player based on the filters and metrics considered for different category player. Induced the enhanced tool tip where it shows the stats of player over matches.
+8. On the player Analysis the Final 11 team was identified and slicers helped the dashboard more interactive & dynamic.
 
 				
 
