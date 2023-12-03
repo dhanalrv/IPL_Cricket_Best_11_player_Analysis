@@ -8,7 +8,7 @@ Project Sportan : We Don't know the strenghts and weaknesses of our oppenents bu
 2. They should be to defend 150 runs on an average
 
 **Data Source** : 
-considered the data from ESPN website through web scrapping. Below are the data set considered for Analysis-
+considered the data from ESPN website through web scrapping. Below are the data sets used for Analysis-
 1. t20_wc_batting_summary.json
 2. t20_wc_bowling_summary.json
 3. t20_wc_match_results.json
@@ -66,6 +66,67 @@ Considered below metrics to perform Analysis-
 | Bowling Style      | Bowling style of the player                     |   <20   |
 | Bowling average    | No. of runs allowed per wicket                  |   >15   |
 | Dot Ball %         | % of dot balls bowled                           |   >140  |
+
+**Data Analysis Steps** :
+1. Used Python for data cleaning and Transformation of the json data files to csv files which makes futher Analysis easier.
+2. Used MS Excel for further glance on data cleaning and Transforming.
+3. Used PowerBI for further transformation and Visualization of insights driven through the Analysis.
+
+**DataCleaning and basic Transformations Using Python (Jupyter Notebook)** : 
+1. Read the Json files into pandas dataframe and performed Data Cleaning and checked the data types.
+2. Handled the Null and duplicate data.
+3. Renaming of column names and cleaned up the weired charaters.
+4. Added new columns which helps in joining the tables and maintain the relationship between tables.
+5. Data Transformations are performed to make data more efficient to draw insights.
+6. Finally write the cleaned and transformed data to csv files.
+
+**DataCleaning and Transformations Using MS Excel** :
+1. Open the files in excel and re-verified the data, make sured the data was cleaned and in required format.
+2. Added the new column image manually which can help in visualization.
+
+**Data Visualization using PowerBI** :
+1. Loaded the data into powerBI and Transformed the data through power Query.
+2. Verified the data was cleaned and was in required format.
+3. Verified the data model and relationship between the tables.
+4. Created the required measures which help in dashboard calculations. Below are the measured used-
+
+Measures:		boundary runs = fact_batting_summary[4s]*4 + fact_batting_summary[6s]*6		
+Sno	Measures	Description / Purpose	DAX FORMULA	TABLE
+
+**| Measures        | Description /Purpose                                    | DAX FORMULA| DAX FORMULA|**
+| :----------------: |:-----------------------------------------------:| :------:|
+| Innings Bowled     | Total innings Bowled by the bowler              |   >2    |
+| Bowling Economy    | Average runs allowed per over                   |   <7    |
+| Bowling Strike Rate| Average no. of balls required to take a wicket  |   <20   |
+
+
+1	Total Runs	Total number of runs scored by the batsman	Total Runs = SUM(fact_batting_summary[runs])	fact_batting_summary
+2	Total Innings Batted	Total number of innings a batsman got a chance to bat	Total Innings Batted = COUNT(fact_batting_summary[match_id])	fact_batting_summary
+3	Total Innings Dismissed	To find the number of innings batsman got out	Total Innings Dismissed= SUM(fact_batting_summary[out])	fact_batting_summary
+4	Batting Average	Average runs scored in an innings	Batting Avg = DIVIDE([Total Runs],[Total Innings Dismissed],0)	fact_batting_summary
+				
+5	Total balls Faced	Total number of balls faced by the batsman	total balls faced = SUM(fact_batting_summary[balls])	fact_batting_summary
+6	Strike Rate	No of runs scored per 100 balls 	Strike rate = DIVIDE([Total Runs],[total balls faced],0)*100	fact_batting_summary
+				
+7	Batting Position	Batting position of a player	Batting Position = ROUNDUP(AVERAGE(fact_batting_summary[battingPos]),0)	fact_batting_summary
+8	Boundary %	Percentage of boundaries scored by the Batsman	Boundary % =  DIVIDE(SUM(fact_batting_summary[Boundary runs]),[Total Runs],0)	fact_batting_summary
+9	Avg. balls Faced	Average balls faced by the batter in an innings	Avg. balls Faced=AVERAGE(fact_batting_summary[balls])	fact_batting_summary
+				
+10	Wickets	Total number of wickets taken by a bowler	wickets = SUM(fact_bowling_summary[wickets])	fact_bowling_summary
+11	balls Bowled	Total number of balls bowled by the bowler	balls Bowled = SUM(fact_bowling_summary[balls])	fact_bowling_summary
+12	Runs Conceded	Total runs conceded by the bowler	Runs Conceded = SUM(fact_bowling_summary[runs])	fact_bowling_summary
+13	Bowling Economy	Average number of runs conceded in an over	Economy = DIVIDE( [Runs Conceded], ([balls Bowled]/6),0)	fact_bowling_summary
+14	Bowling Strike Rate	Number of balls bowled per wicket	Bowling Strike Rate = DIVIDE([balls Bowled], [wickets],0)	fact_bowling_summary
+15	Bowling Average	No. of runs allowed per wicket  	Bowling Average = DIVIDE([Runs Conceded],[wickets],0)	fact_bowling_summary
+				
+16	Total Innings Bowled	Total number of innings bowled by a bowler	Total Innings Bowled = DISTINCTCOUNT(fact_bowling_summary[match_id])	fact_bowling_summary
+17	Dot Ball %	Percentage of dot balls bowled by a bowler	Dot ball % = DIVIDE(SUM(fact_bowling_summary[zeros]), SUM(fact_bowling_summary[balls]),0)	fact_bowling_summary
+				
+18	Player Selection	To understand if a player is selected or not	Player Selection = if(ISFILTERED(dim_players[name]),"1","0")	
+19	Display Text	To display a text of no player is selected	"Display Text = if([Player Selection] = "1", " " ,"Select Player(s) by clicking 
+the player’s name to see their individual or combined strength.")"	
+20	Color Callout Value	To display a value only when a player is selected	Color Callout Value = if([Player Selection]="0", "#D0CF1D","#1D1D2E")	<img width="1039" alt="image" src="https://github.com/dhanalrv/IPL_Cricket_Best_11_player_Analysis/assets/123315375/ee53ca7e-9639-4524-bce5-6913eaae895c">
+
 
 
 
